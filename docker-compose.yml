@@ -1,5 +1,15 @@
 version: "3.7"
 services:
+  gateway:
+    build:
+      context: gateway/docker/development/nginx
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - frontend
+      - api
+
   frontend:
     build:
       context: frontend/docker/development/nginx
