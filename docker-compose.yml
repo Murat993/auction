@@ -15,8 +15,6 @@ services:
     build:
       context: frontend/docker
       dockerfile: development/nginx/Dockerfile
-    ports:
-      - "8080:80"
     volumes:
       - ./frontend:/app
 
@@ -24,8 +22,6 @@ services:
     build:
       context: api/docker
       dockerfile: development/nginx/Dockerfile
-    ports:
-      - "8081:80"
     volumes:
       - ./api:/app
     depends_on:
