@@ -1,4 +1,4 @@
-certbot_email: mail@deworker.pro
+certbot_email: muratnysambaev93@gmail.com
 certbot_hosts:
-  - demo-auction.deworker.pro
-  - api.demo-auction.deworker.pro
+  - demo-auction.nysambaev.online
+  - api.demo-auction.nysambaev.online
