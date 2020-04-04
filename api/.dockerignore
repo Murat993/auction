@@ -4,3 +4,4 @@
 /var/log/*
 /var/.phplint.json
 /var/.phpcs.json
+/var/.phpunit.result.cache
