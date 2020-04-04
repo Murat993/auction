@@ -2,3 +2,5 @@
 /vendor
 /var/cache/*
 /var/log/*
+/var/.phplint.json
+/var/.phpcs.json
