@@ -6,9 +6,11 @@ check: lint analyze test
 lint: api-lint
 analyze: api-analyze
 test: api-test
+test-coverage: api-test-coverage
 test-unit: api-test-unit
-test-functional: api-test-functional
 test-unit-coverage: api-test-unit-coverage
+test-functional: api-test-functional
+test-functional-coverage: api-test-functional-coverage
 
 docker-up:
 	docker-compose up -d
@@ -18,6 +20,12 @@ docker-down:
 
 docker-down-clear:
 	docker-compose down -v --remove-orphans
+
+docker-pull:
+	docker-compose pull
+
+docker-build:
+	docker-compose build
 
 api-init: api-composer-install api-permissions
 
@@ -37,20 +45,20 @@ api-analyze:
 api-test:
 	docker-compose run --rm api-php-cli composer test
 
+api-test-coverage:
+	docker-compose run --rm api-php-cli composer test-coverage
+
 api-test-unit:
 	docker-compose run --rm api-php-cli composer test -- --testsuite=unit
+
+api-test-unit-coverage:
+	docker-compose run --rm api-php-cli composer test-coverage -- --testsuite=unit
 
 api-test-functional:
 	docker-compose run --rm api-php-cli composer test -- --testsuite=functional
 
-api-test-unit-coverage:
-	docker-compose run --rm api-php-cli composer test-unit-coverage
-
-docker-pull:
-	docker-compose pull
-
-docker-build:
-	docker-compose build
+api-test-functional-coverage:
+	docker-compose run --rm api-php-cli composer test-coverage -- --testsuite=functional
 
 build: build-gateway build-frontend build-api
 
@@ -64,6 +72,7 @@ build-api:
 	docker --log-level=debug build --pull --file=api/docker/production/nginx/Dockerfile --tag=${REGISTRY}/auction-api:${IMAGE_TAG} api
 	docker --log-level=debug build --pull --file=api/docker/production/php-fpm/Dockerfile --tag=${REGISTRY}/auction-api-php-fpm:${IMAGE_TAG} api
 	docker --log-level=debug build --pull --file=api/docker/production/php-cli/Dockerfile --tag=${REGISTRY}/auction-api-php-cli:${IMAGE_TAG} api
+
 try-build:
 	REGISTRY=localhost IMAGE_TAG=0 make build
 
