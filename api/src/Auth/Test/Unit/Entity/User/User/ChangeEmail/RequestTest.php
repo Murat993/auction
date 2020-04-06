@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Auth\Test\Unit\Entity\User\User\ChangeEmail;
 
 use App\Auth\Entity\User\Email;
+use App\Auth\Entity\User\Role;
 use App\Auth\Entity\User\Token;
 use App\Auth\Test\Builder\UserBuilder;
 use DateTimeImmutable;
@@ -31,6 +32,8 @@ class RequestTest extends TestCase
         self::assertEquals($token, $user->getNewEmailToken());
         self::assertEquals($old, $user->getEmail());
         self::assertEquals($new, $user->getNewEmail());
+
+        self::assertEquals(Role::USER, $user->getRole()->getName());
     }
 
     public function testSame(): void
