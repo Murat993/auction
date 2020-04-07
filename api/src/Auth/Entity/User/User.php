@@ -37,10 +37,10 @@ class User
         Id $id,
         DateTimeImmutable $date,
         Email $email,
-        Network $identity
+        Network $network
     ): self {
         $user = new self($id, $date, $email, Status::active());
-        $user->networks->append($identity);
+        $user->networks->append($network);
         return $user;
     }
 
@@ -67,15 +67,15 @@ class User
         $this->joinConfirmToken = null;
     }
 
-    public function attachNetwork(Network $identity): void
+    public function attachNetwork(Network $network): void
     {
         /** @var Network $existing */
         foreach ($this->networks as $existing) {
-            if ($existing->isEqualTo($identity)) {
+            if ($existing->isEqualTo($network)) {
                 throw new DomainException('Network is already attached.');
             }
         }
-        $this->networks->append($identity);
+        $this->networks->append($network);
     }
 
     public function requestPasswordReset(Token $token, DateTimeImmutable $date): void

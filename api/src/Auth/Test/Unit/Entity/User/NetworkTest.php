@@ -11,13 +11,13 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers Network
  */
-class NetworkIdentityTest extends TestCase
+class NetworkTest extends TestCase
 {
     public function testSuccess(): void
     {
         $network = new Network($name = 'google', $identity = 'google-1');
 
-        self::assertEquals($name, $network->getNetwork());
+        self::assertEquals($name, $network->getName());
         self::assertEquals($identity, $network->getIdentity());
     }
 
