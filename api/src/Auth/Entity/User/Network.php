@@ -32,7 +32,7 @@ class Network
     public function isEqualTo(self $network): bool
     {
         return
-            $this->getNetwork() === $network->getName() &&
+            $this->getName() === $network->getName() &&
             $this->getIdentity() === $network->getIdentity();
     }
 
