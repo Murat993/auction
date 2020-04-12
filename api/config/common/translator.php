@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Middleware\LocaleNegotiation;
+use Middlewares\ContentLanguage;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Translation\Loader\PhpFileLoader;
 use Symfony\Component\Translation\Loader\XliffFileLoader;
@@ -28,7 +28,7 @@ return [
         return $translator;
     },
 
-    LocaleNegotiation::class => function (ContainerInterface $container): LocaleNegotiation {
+    ContentLanguage::class => function (ContainerInterface $container): ContentLanguage {
         /** @var Translator $translator */
         $translator = $container->get(Translator::class);
         /**
@@ -37,7 +37,7 @@ return [
          */
         $config = $container->get('config')['locales'];
 
-        return new LocaleNegotiation($config['allowed']);
+        return new ContentLanguage($config['allowed']);
     },
 
     'config' => [
